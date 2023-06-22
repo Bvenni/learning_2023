@@ -2,23 +2,36 @@
 #include <stdlib.h>
 #include <string.h>
 
-int calculateTotalSeconds(const char *timeString) {
-    int hours, minutes, seconds;
-    sscanf(timeString, "%d:%d:%d", &hours, &minutes, &seconds);
+struct Student {
+    int rollno;
+    char name[20];
+    float marks;
+};
 
-    int totalSeconds = hours * 3600 + minutes * 60 + seconds;
-    return totalSeconds;
+void displayArray(struct Student* students, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("Student %d:\n", i + 1);
+        printf("Rollno: %d\n", students[i].rollno);
+        printf("Name: %s\n", students[i].name);
+        printf("Marks: %.2f\n\n", students[i].marks);
+    }
 }
 
 int main() {
-    char timeString[9]; // Assumes the time string format is "HH:MM:SS" with fixed length of 8 characters
+    int size;
 
-    printf("Enter the time string (HH:MM:SS): ");
-    scanf("%8s", timeString);
+    // Get the size of the array from the user
+    printf("Enter the number of students: ");
+    scanf("%d", &size);
 
-    int totalSeconds = calculateTotalSeconds(timeString);
+    // Create an array of structures dynamically
+    struct Student* students = (struct Student*)malloc(size * sizeof(struct Student));
 
-    printf("Total seconds: %d\n", totalSeconds);
+    // Display the array of structures
+    displayArray(students, size);
+
+    // Free dynamically allocated memory
+    free(students);
 
     return 0;
 }

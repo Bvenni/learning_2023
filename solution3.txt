@@ -1,53 +1,54 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int rotleft(char *str, int n);
-int rotright(char *str ,int n);
+struct Student {
+    int rollno;
+    char name[20];
+    float marks;
+};
 
-int main(){
-    char str1[100],str2[100];
-    int n2,n1;
-    printf("enter the string :");
-    scanf("%[^\n]s\n",str1);
-    printf("enter the number of rotations:");
-    scanf("%d",&n1);
+void searchByName(struct Student* students, int size, const char* name) {
+    int found = 0;
 
-    getchar();
+    for (int i = 0; i < size; i++) {
+        if (strcmp(students[i].name, name) == 0) {
+            printf("Student found:\n");
+            printf("Rollno: %d\n", students[i].rollno);
+            printf("Name: %s\n", students[i].name);
+            printf("Marks: %.2f\n", students[i].marks);
+            found = 1;
+            break;
+        }
+    }
 
-    printf("enter the second string :");
-    scanf("%[^\n]s\n",str2);
-    printf("enter the number of rotations for a second string:");
-    scanf("%d",&n2);
+    if (!found) {
+        printf("Student not found with the name: %s\n", name);
+    }
+}
 
-    rotleft(str1,n1);
-    printf("the left rotated string : %s\n",str1);
+int main() {
+    int size;
 
-    rotright(str2,n2);
-    printf("the right rotated string : %s\n",str2);
+    // Get the size of the array from the user
+    printf("Enter the number of students: ");
+    scanf("%d", &size);
+
+    // Create an array of structures dynamically
+    struct Student* students = (struct Student*)malloc(size * sizeof(struct Student));
+
+    // Initialize the array of structures
+
+    // Prompt the user to enter the name to search for
+    char name[20];
+    printf("Enter the name to search: ");
+    scanf("%s", name);
+
+    // Perform search operation based on the name
+    searchByName(students, size, name);
+
+    // Free dynamically allocated memory
+    free(students);
 
     return 0;
-}
-
-int rotleft(char *str , int n){
-    int len = strlen(str);int i;
-    n%=len;
-    for (i=0;i<n;i++){
-        char temp= str[0];
-        for(int j=0;j<len-1;j++){
-            str[j]=str[j+1];
-        }
-        str[len-1]=temp;
-    }
-}
-
-int rotright(char * str, int n){
-    int len=strlen(str);
-    n%=len;
-    for(int i=0;i<n;i++){
-        char temp=str[len -1];
-        for(int j=len-1;j>0;j--){
-            str[j]=str[j-1];
-        }
-        str[0]=temp;
-    }
 }

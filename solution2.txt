@@ -1,31 +1,24 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int main(){
-    int arr[20],i,n;
-    printf("enter the size of array:");
-    scanf("%d", &n);
-    printf("enter the array elements");
-    for(i=0;i<n;i++){
-        scanf("%d", &arr[i]);
-    }
-    // now to find min and max
-    int j , min=arr[0], max=arr[0];
-    for(j=0;j < n-1;j++){
-        if (arr[j] > arr[j+1]){
-            min=arr[j+1];
-            max=arr[j];
-        }
-        else{
-            min=arr[j];
-            max=arr[j+1];
-        }
-       
-    }
-    if (min != max){
-    printf("the max in array is: %d",max);
-    printf("the min in array is: %d",min);
-    }
-    else 
-     printf("all are equal");
-  return 0;
+int calculateTotalSeconds(const char *timeString) {
+    int hours, minutes, seconds;
+    sscanf(timeString, "%d:%d:%d", &hours, &minutes, &seconds);
+
+    int totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    return totalSeconds;
+}
+
+int main() {
+    char timeString[9]; // Assumes the time string format is "HH:MM:SS" with fixed length of 8 characters
+
+    printf("Enter the time string (HH:MM:SS): ");
+    scanf("%8s", timeString);
+
+    int totalSeconds = calculateTotalSeconds(timeString);
+
+    printf("Total seconds: %d\n", totalSeconds);
+
+    return 0;
 }

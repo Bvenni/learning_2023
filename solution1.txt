@@ -1,25 +1,30 @@
 #include<stdio.h>
-int calsum(int arr[],int len);
+#include<string.h>
+int togstring(char *str);
 
 int main(){
-    int arr[5],k,n;
-    printf("enter the array size");
-    scanf("%d",&n);
-    printf("enter the array elements:");
-    for(k=0;k < n ;k++){
-    scanf("%d",&arr[k]);
-    }
-    int sum = calsum(arr,n);
-    float avg = (float)sum/n;
-    printf("sum is : %d", sum);
-    printf("avg is : %.2f", avg);
+    char str[100];
+    printf("enter the string");
+    scanf("%[^\n]s",str);
+
+    togstring(str);
+
+    printf("the string after toggling : %s \n",str);
+    return 0;
 }
 
-int calsum(int arr[],int n){
-    int sum =0,i;
-    for (i=0;i<n;i++){
-        sum = sum + arr[i]; 
+int togstring(char *str){
+    int i=0;
+    while (str[i])
+    {
+        if (str[i]>='A' && str[i] <='Z')
+        {
+            str[i]+=32;
+        }
+        else if( str[i]>='a' && str[i]<='z')
+        {
+            str[i]-=32;
+        }
+        i++;
     }
-    return sum;
 }
-      

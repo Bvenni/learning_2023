@@ -1,23 +1,31 @@
 #include<stdio.h>
-int main()
-{
-    int i, n, lar,sm, elem;
-    printf ("Enter total number of elements n");
-    scanf ("%d", &elem);
-    printf ("Enter first number n: \n");
-    scanf ("%d", &n);
-    lar = n;
-    sm=n;
-    for (i=1; i<= elem -1 ; i++)
-    {
-        printf ("Enter another number \n");
-        scanf ("%d",&n);
-        if (n>lar)
-        lar=n;
-        if (n<sm)
-        sm=n;
+// sum of even and odd index
+int diff(int arr[],int n,int* sumeven,int* sumodd);
+
+int main(){
+    int arr[20],i,n;
+    printf("enter the size of the array:");
+    scanf("%d",&n);
+    printf("enter the array elements :");
+    for(i=0;i<n;i++){
+        scanf("%d",&arr[i]);
     }
-    printf ("n The largest number is %d \n", lar);
-    printf ("n The smallest number is %d \n", sm);
+    int sumeven=0,sumodd=0;
+    diff(arr,n, &sumeven, &sumodd);
+    printf("the sum of even idex: %d",sumeven);
+    printf("the sum of odd index: %d",sumodd);
+
     return 0;
+}
+
+int diff(int arr[],int n,int* sumeven, int* sumodd){
+    int j;
+    for(j=0;j<n;j++){
+        if (j%2==0){
+        *sumeven=arr[j]+ *sumeven;
+        }
+        else{
+        *sumodd=arr[j]+ *sumodd;
+    }
+    }
 }

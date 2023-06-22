@@ -1,38 +1,31 @@
-#include <stdio.h>
+#include<stdio.h>
+#include<math.h>
+int revarray(int arr[],int n);
 
-// Function to find the largest number by deleting a single digit from a 4-digit number
-int findLargestNumber(int num) {
-    int largest = 0;
-    int divisor = 1;
-    int currentNum = num;
-
-    while (currentNum > 0) {
-        // Truncate the number by excluding the current digit
-        int truncatedNum = num / (divisor * 10) * divisor + num % divisor;
-
-        // Compare the truncated number with the current largest number
-        if (truncatedNum > largest) {
-            largest = truncatedNum;
-        }
-
-        // Update the divisor and current number for the next iteration
-        divisor *= 10;
-        currentNum /= 10;
+int main(){
+    int arr[20],i,n;
+    printf("enter the size of array: ");
+    scanf("%d",&n);
+    printf("enter the elements of the array :"); 
+    for(i=0;i<n;i++){
+        scanf("%d",&arr[i]);
+    }
+    revarray(arr,n);
+    printf("the reverse is:");
+    for(i=0;i<n;i++){
+        printf("%d",arr[i]);
     }
 
-    return largest;
 }
 
-int main() {
-    int num;
-
-    printf("Enter a 4-digit number: ");
-    scanf("%d", &num);
-
-    // Find the largest number by deleting a single digit
-    int largestNumber = findLargestNumber(num);
-
-    printf("Largest number by deleting a single digit: %d\n", largestNumber);
-
-    return 0;
+int revarray(int arr[],int n){
+    int start=0;
+    int end = n-1;
+    while(start < end){
+        int temp = arr[start];
+        arr[start]=arr[end];
+        arr[end]=temp;
+        start++;
+        end--;
+    }
 }

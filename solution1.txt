@@ -1,14 +1,27 @@
-// longest of 2 numbers using if-else
-#include <stdio.h>
- 
-int main()
+#include<stdio.h>
+
+int main(){
+int r,i,j,s,k;
+
+printf("Enter the no. of rows : ");
+scanf("%d",&r);
+
+for(i=r;i>=1;i--)
 {
-    int n1,n2;
-     scanf("%d %d",&n1,&n2);
-     if(n1>n2){
-         printf("largest number is :%d\n",n1);
-     }
-     else{
-         printf("largest number is :%d",n2);
-     }
+for(j=1;j<=i;j++)
+{
+printf("%d",j);
+}
+
+for(s=1;s<=2*(r-i);s++)
+{
+printf(" ");
+}
+
+for(k=i;k>=1;k--)
+{
+printf("%d",k);
+}
+printf("\n");
+}
 }

@@ -1,39 +1,21 @@
 #include <stdio.h>
 
-int bit_operations(int num, int oper_type) {
-    switch (oper_type) {
-        case 1:
-            // Set 1st bit
-            num |= 1;
-            break;
-        case 2:
-            // Clear 31st bit
-            num &= ~(1 << 31);
-            break;
-        case 3:
-            // Toggle 16th bit
-            num ^= (1 << 16);
-            break;
-        default:
-            printf("Error: Invalid operation type.\n");
-            break;
+int count_bits(int *array, int size) {
+  int total_bits = 0;
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < 32; j++) {
+      if ((array[i] & (1 << j)) != 0) {
+        total_bits++;
+      }
     }
-
-    return num;
+  }
+  return total_bits;
 }
 
 int main() {
-    int num, oper_type;
-
-    printf("Enter the number (32 bits): ");
-    scanf("%d", &num);
-
-    printf("Enter the operation type (1, 2, or 3): ");
-    scanf("%d", &oper_type);
-
-    int result = bit_operations(num, oper_type);
-
-    printf("Result: %d\n", result);
-
-    return 0;
+  int a[] = {0x1, 0xF4, 0x10001};
+  int size = sizeof(a) / sizeof(a[0]);
+  int total_bits = count_bits(a, size);
+  printf("The total number of bits set is %d\n", total_bits);
+  return 0;
 }

@@ -1,43 +1,27 @@
 #include <stdio.h>
 
-int main() {
-    int operand1, operand2, result;
-    char operator;
-
-    printf("Enter operand1: ");
-    scanf("%d", &operand1);
-
-    printf("Enter the operator: ");
-    scanf(" %c", &operator);
-
-    printf("Enter operand2: ");
-    scanf("%d", &operand2);
-
-    switch (operator) {
-        case '+':
-            result = operand1 + operand2;
-            printf("Result: %d\n", result);
-            break;
-        case '-':
-            result = operand1 - operand2;
-            printf("Result: %d\n", result);
-            break;
-        case '*':
-            result = operand1 * operand2;
-            printf("Result: %d\n", result);
-            break;
-        case '/':
-            if (operand2 != 0) {
-                result = operand1 / operand2;
-                printf("Result: %d\n", result);
-            } else {
-                printf("Error: Division by zero is not allowed.\n");
-            }
-            break;
-        default:
-            printf("Error: Invalid operator.\n");
-            break;
+int count_bits(int array[], int size) {
+  int total_bits = 0;
+  for (int i = 0; i < size; i++) {
+    int num = array[i];
+    int count = 0;
+    while (num != 0) {
+      if (num & 1) {
+        count++;
+      }
+      num >>= 1;
     }
+    total_bits += count;
+  }
+  return total_bits;
+}
 
-    return 0;
+int main() {
+  int a[] = {0x1, 0xF4, 0x10001};
+  int size = sizeof(a) / sizeof(a[0]);
+
+  int result = count_bits(a, size);
+  printf("Total bits: %d\n", result);
+
+  return 0;
 }
